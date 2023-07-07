@@ -3,20 +3,19 @@ import React, {useState} from 'react';
 import Timer from './src/features/Timer';
 import { colors } from './src/utils/colors';
 import Focus from './src/features/Focus';
-// import { transparent } from 'react-native-paper/lib/typescript/src/styles/themes/v2/colors';
 
 export default function App() {
   const [currentSubject, setCurrentSubject] = useState(null)
   return (
     <>
-    {/* <StatusBar barStyle="light-content" backgroundColor="orange" /> */}
+    <StatusBar barStyle="light-content" backgroundColor={colors.darkBlue} />
       <SafeAreaView style={styles.container}>
         {!currentSubject ? (<Focus addSubject={setCurrentSubject}/>) : 
         (
           <Timer 
           focusSubject={currentSubject}
           onTimerEnd={() => {}}
-          clearSubject={() => {}}
+          clearSubject={() => {setCurrentSubject(null)}}
           />
         )}
       </SafeAreaView>

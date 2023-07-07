@@ -1,26 +1,44 @@
-import React, { useEffect, useState } from 'react'
+import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import { colors } from '../utils/colors'
 
 const minutesToMills = (min) => min * 1000 * 60;
 const formatTime = (time) => (time < 10 ? `0${time}` : time);
 
-function CountDown({minutes=0.1,isPaused, onProgress, onEnd}) {
+const CountDown = forwardRef(({minutes=0.12,isPaused, onProgress, onEnd }, ref ) => {
+
+
+
+    useImperativeHandle(ref,()=>{
+        return {
+            reseting: reseting
+        }
+    })
 
     const interval = React.useRef(null);
     const [millis,setMillis] = useState(null);
-
+    const reseting = () => setMillis(minutesToMills(0.12))
     const countDown = () => {
         setMillis((time) => {
-            if(time === 0) {
-                clearInterval(interval.current);
-                onEnd();
-                return time;
-            }
-            const timeLeft = time - 1000;
-            return timeLeft;
-        })
-    }
+          if (time <= 1000) {
+            clearInterval(interval.current);
+            onEnd();
+            // reset()
+            return 0;
+          }
+          const timeLeft = time - 1000;
+          return timeLeft;
+        });
+      };
+      
+      useEffect(()=>{
+        if(millis <= 0) {
+            setTimeout(()=>{
+                setMillis(minutesToMills(0.12))
+            },1500)
+        }
+        console.log("Countdown"+millis);
+      },[millis])
 
     useEffect(()=> {
         setMillis(minutesToMills(minutes));
@@ -44,11 +62,11 @@ function CountDown({minutes=0.1,isPaused, onProgress, onEnd}) {
     const seconds = Math.floor(millis/1000)%60;
 
   return (
-    <Text style={styles.Text}>
+    <Text style={styles.text}>
         {formatTime(minute)} : {formatTime(seconds)}
     </Text>
   )
-}
+})
 
 const styles = StyleSheet.create({
     text : {
@@ -59,4 +77,5 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(94,132,226,0.3)'
     }
 })
+
 export default CountDown

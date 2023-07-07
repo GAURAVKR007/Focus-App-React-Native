@@ -18,11 +18,11 @@ const styles = (size) => ({
         alignItems: "center",
         justifyContent: "center",
         borderColor: colors.white,
-        borderWidth: 2
+        borderWidth: 2,
     },
     text: {
         color: colors.white,
-        fontSize: size/3
+        fontSize: size/3.5
     }
 })
 
