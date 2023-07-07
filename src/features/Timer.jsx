@@ -5,8 +5,10 @@ import RoundedButton from '../components/RoundedButton';
 import { ProgressBar } from 'react-native-paper';
 import { colors } from '../utils/colors';
 import Timing from './Timing';
+import { useKeepAwake } from 'expo-keep-awake';
 
 function Timer({ focusSubject, onTimerEnd, clearSubject }) {
+    useKeepAwake();
   const [isStarted, setIsStarted] = useState(false);
   const [progress, setProgress] = useState(1);
   const [minutes, setMinutes] = useState(0.12);
@@ -32,13 +34,18 @@ function Timer({ focusSubject, onTimerEnd, clearSubject }) {
     Vibration.vibrate(PATTERN);
     setIsStarted(false);
     setProgress(1);
+    onTimerEnd(focusSubject);
   };
 
-  const reset = () => {
-    setMinutes(0.12);
+  const handleReset = () => {
     setIsStarted(false);
-    console.log("Timer" + minutes);
-  };
+    setProgress(1);
+    // console.log(progress);
+    childRef.current.reseting()
+    setMinutes(0.12)
+  }
+
+
 
   return (
     <View style={styles.container}>
@@ -83,7 +90,7 @@ function Timer({ focusSubject, onTimerEnd, clearSubject }) {
       </View>
       <View style={styles.clearSubject}>
         <RoundedButton size={80} title="Clear" onPress={clearSubject} />
-        <RoundedButton size={80} title="Reset" onPress={() => childRef.current.reseting()} />
+        <RoundedButton size={80} title="Reset" onPress={handleReset} />
       </View>
     </View>
   );

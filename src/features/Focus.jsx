@@ -13,8 +13,9 @@ function Focus({addSubject}) {
           <TextInput
             style={styles.textInput}
             label="What would you like to focus on ?" 
-            textColor='black'
+            textColor='#343A40'
             value={subject}
+            
             onChangeText={text => setSubject(text)}
             />
             <View style={styles.button}>
@@ -29,7 +30,6 @@ function Focus({addSubject}) {
 
 const styles = StyleSheet.create({
     container : {
-        flex: 1,
     },
     inputContainer: {
         // flex: 0.3,

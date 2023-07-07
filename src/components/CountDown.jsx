@@ -7,8 +7,6 @@ const formatTime = (time) => (time < 10 ? `0${time}` : time);
 
 const CountDown = forwardRef(({minutes=0.12,isPaused, onProgress, onEnd }, ref ) => {
 
-
-
     useImperativeHandle(ref,()=>{
         return {
             reseting: reseting
@@ -17,7 +15,9 @@ const CountDown = forwardRef(({minutes=0.12,isPaused, onProgress, onEnd }, ref )
 
     const interval = React.useRef(null);
     const [millis,setMillis] = useState(null);
-    const reseting = () => setMillis(minutesToMills(0.12))
+    const reseting = () => {
+        setMillis(minutesToMills(0.12))
+    }
     const countDown = () => {
         setMillis((time) => {
           if (time <= 1000) {
@@ -37,7 +37,7 @@ const CountDown = forwardRef(({minutes=0.12,isPaused, onProgress, onEnd }, ref )
                 setMillis(minutesToMills(0.12))
             },1500)
         }
-        console.log("Countdown"+millis);
+        // console.log("Countdown"+millis);
       },[millis])
 
     useEffect(()=> {
