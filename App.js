@@ -1,9 +1,12 @@
 import { StyleSheet, Text, StatusBar, View,SafeAreaView ,Platform , Button, Alert } from 'react-native';
 import React from 'react';
+
 import { colors } from './src/utils/colors';
 import Focus from './src/features/Focus';
+// import { transparent } from 'react-native-paper/lib/typescript/src/styles/themes/v2/colors';
 
 export default function App() {
+  
   return (
     <>
     {/* <StatusBar barStyle="light-content" backgroundColor="orange" /> */}
