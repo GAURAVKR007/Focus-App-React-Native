@@ -15,15 +15,14 @@ export default function App() {
     setTimeout(()=> {
       setLoading(false);
     },2000)
-  })
+  },[])
 
   return (<>
-  
-    {isLoading ? <View style={{flex: 1,justifyContent: "center", alignItems: "center", backgroundColor: colors.darkBlue}}><ActivityIndicator 
+    <StatusBar barStyle="light-content" backgroundColor={colors.darkBlue} />
+    {isLoading ?<View style={{flex: 1,justifyContent: "center", alignItems: "center", backgroundColor: colors.darkBlue}}><ActivityIndicator 
         size={100}
         color="#fff"
         /></View> : <>
-    <StatusBar barStyle="light-content" backgroundColor={colors.darkBlue} />
       <SafeAreaView style={styles.container}>
         {!currentSubject ? (
           <>

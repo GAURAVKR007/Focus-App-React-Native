@@ -4,11 +4,11 @@ import LottieView from "lottie-react-native"
 function Splash() {
   return (
     <View style={{flex: 1, alignItems: "center", margin: 0}}>
-        <StatusBar barStyle="light-content" backgroundColor="black" />
+        {/* <StatusBar barStyle="light-content" backgroundColor="black" /> */}
         <LottieView
             source={require("../utils/Loading.json")}
             autoPlay
-            loop={true}
+            loop={false}
             resizeMode='cover'
             // onAnimationFinish={}
         />
